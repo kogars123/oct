@@ -1,5 +1,7 @@
 # global
+# global
 import ivy
+import paddle
 from ivy.functional.frontends.paddle.func_wrapper import (
     to_ivy_arrays_and_back,
 )
@@ -7,6 +9,13 @@ from ivy.func_wrapper import (
     with_unsupported_dtypes,
     with_supported_dtypes,
 )
+
+# moveaxis function
+# This function moves the axes of an input tensor according to the provided source and destination positions.
+# Example usage:
+#   x = paddle.randn([3, 4, 5])
+#   y = moveaxis(x, 0, -1)
+#   y.shape  # [4, 5, 3]
 
 
 @to_ivy_arrays_and_back
@@ -96,3 +105,7 @@ def cast(x, dtype):
 @to_ivy_arrays_and_back
 def broadcast_to(x, shape, name=None):
     return ivy.broadcast_to(x, shape)
+
+@to_ivy_arrays_and_back
+def moveaxis(x, source, destination):
+    return paddle.moveaxis(x, source, destination)
